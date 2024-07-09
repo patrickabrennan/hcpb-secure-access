@@ -123,11 +123,14 @@ resource "aws_instance" "boundary_self_managed_worker" {
   availability_zone           = "eu-west-2b"
   user_data_replace_on_change = true
   user_data_base64            = data.cloudinit_config.boundary_self-managed_worker.rendered
-  //key_name                    = "boundary"
-  private_ip             = "172.31.32.93"
-  subnet_id              = aws_subnet.boundary_db_demo_subnet.id
-  vpc_security_group_ids = [aws_security_group.boundary_ingress_worker_ssh.id]
+  subnet_id                   = aws_subnet.boundary_db_demo_subnet.id
+  vpc_security_group_ids      = [aws_security_group.boundary_ingress_worker_ssh.id]
   tags = {
     Name = "Boundary Self-Managed Worker"
+  }
+  lifecycle {
+    ignore_changes = [
+      user_data_base64,
+    ]
   }
 }

@@ -47,14 +47,13 @@ resource "boundary_target" "aws" {
   scope_id                 = boundary_scope.project.id
   session_connection_limit = -1
   default_port             = 22
-  default_client_port      = 50505
   host_source_ids = [
     boundary_host_set_plugin.aws_db.id,
     boundary_host_set_plugin.aws_dev.id,
     boundary_host_set_plugin.aws_prod.id,
   ]
-  # enable_session_recording                   = true
-  # storage_bucket_id                          = aws_s3_bucket.boundary_session_recording_bucket.id
+  enable_session_recording                   = true
+  storage_bucket_id                          = boundary_storage_bucket.boundary_storage_bucket.id
   injected_application_credential_source_ids = [boundary_credential_library_vault_ssh_certificate.vault_ssh_cert.id]
 }
 
