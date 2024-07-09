@@ -3,7 +3,7 @@ resource "aws_vpc" "boundary_db_demo_vpc" {
   cidr_block           = var.aws_vpc_cidr
   enable_dns_hostnames = true
   tags = {
-    Name = "Boundary DB Demo Public VPC CIDR Block"
+    Name = "Boundary Demo Public VPC CIDR Block"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "boundary_db_demo_subnet" {
   map_public_ip_on_launch = true
   availability_zone       = var.availability_zone
   tags = {
-    Name = "Boundary DB Demo Public Subnet"
+    Name = "Boundary Demo Public Subnet"
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_subnet" "boundary_db_demo_subnet2" {
   map_public_ip_on_launch = true
   availability_zone       = var.availability_zone2
   tags = {
-    "Name" = "Boundary DB Demo Public Subnet 2"
+    "Name" = "Boundary Demo Public Subnet 2"
   }
 }
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "boundary_db_demo_subnet2" {
 resource "aws_internet_gateway" "boundary_db_demo_ig" {
   vpc_id = aws_vpc.boundary_db_demo_vpc.id
   tags = {
-    Name = "boundary-db-demo-igw"
+    Name = "boundary-demo-igw"
   }
 }
 
@@ -45,9 +45,8 @@ resource "aws_route_table" "boundary_db_demo_rt" {
     gateway_id = aws_internet_gateway.boundary_db_demo_ig.id
   }
   tags = {
-    Name = "boundary-db-demo-rt"
+    Name = "boundary-demo-rt"
   }
-
 }
 
 # AWS resource to associate the route table to the CIDR blocks created

@@ -29,11 +29,7 @@ NOTE:
 > The fact that this repo deploys into a public subnet and therefore having a public IP attached to the targets is not supposed to mimic a production environment. This is purely to demonstrate some of the features in Boundary.
 
 IMPORTANT:
-> Due to the current limitation in the Boundary Terraform provider, once you have created the HCPb storage bucket after the first `terraform apply`, you need to do the following:
-> 1. Comment out the code in the `hcpb-storage-bucket.tf` file.
-> 2. Change the `storage_bucket_id` attribute in the `boundary_target aws` resource in the `boundary-config.tf` file to the ID of the storage bucket after it's created. (This can be found in the Boundary admin UI.)
-
-> The reason for this is that upon a `terraform destroy`, the provider cannot successfully remove the `boundary_storage_bucket` resource and will error. You can remove this manually via the CLI if you wish.
+> Due to the current limitation in the Boundary Terraform provider, issuing a `terraform destroy` will not remove the `boundary_storage_bucket` resource. Prior to issuing a `terraform destroy` go to the EC2 target and disable session recording. Next go to the Storage Buckets in the admin UI and make a note of the storage bucket ID. On the CLI issue the following command: `boundary storage-buckets delete -id $your-id`. This will remove the Storage Bucket and when you then issue a `terraform destroy`, all of your infrastructure will be removed.
 
 Your HCP Boundary and Vault Clusters needs to be created prior to executing the Terraform code. For people new to HCP, a trial can be utilised, which will give $50 credit to try, which is ample to test this solution.
 

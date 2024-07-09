@@ -13,8 +13,7 @@ resource "boundary_host_static" "postgres_host" {
 resource "boundary_host_set_static" "db_static_host_set" {
   name            = "Postgres Static Host Set"
   host_catalog_id = boundary_host_catalog_static.db_host_catalog.id
-
-  host_ids = [boundary_host_static.postgres_host.id]
+  host_ids        = [boundary_host_static.postgres_host.id]
 }
 
 resource "boundary_target" "dba" {

@@ -19,35 +19,29 @@ variable "aws_secret" {
 }
 
 variable "aws_region" {
-  type    = string
-  default = "eu-west-2"
+  type = string
 }
 
 variable "aws_vpc_cidr" {
   type        = string
   description = "The AWS Region CIDR range to assign to the VPC"
-  default     = "172.31.0.0/16"
 }
 
 variable "aws_subnet_cidr" {
-  type    = string
-  default = "172.31.32.0/24"
+  type = string
 }
 
 variable "aws_subnet_cidr2" {
-  type    = string
-  default = "172.31.33.0/24"
+  type = string
 }
 
 variable "availability_zone" {
-  type    = string
-  default = "eu-west-2b"
+  type = string
 }
 
 variable "availability_zone2" {
   description = "Second AZ for RDS deployment"
   type        = string
-  default     = "eu-west-2c"
 }
 
 variable "vault_addr" {

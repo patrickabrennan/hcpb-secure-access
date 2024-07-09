@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "boundary_session_recording_bucket" {
-  bucket        = var.s3_bucket_name
+  bucket        = "${random_pet.unique_names.id}-bucket"
   force_destroy = true
   tags = {
     Name        = var.s3_bucket_name_tags
