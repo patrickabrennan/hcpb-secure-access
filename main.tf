@@ -34,7 +34,7 @@ terraform {
 
 # Declare the provider for the AWS resource to be managed by Terraform
 provider "aws" {
-  region = "eu-west-2"
+  region = "us-east-1"
 }
 
 provider "vault" {
