@@ -120,7 +120,7 @@ and that the boundary_worker resource also completes, to ensure the token is gen
 resource "aws_instance" "boundary_self_managed_worker" {
   ami                         = "ami-080e1f13689e07408"
   instance_type               = "t2.micro"
-  availability_zone           = "us-east-1a"
+  availability_zone           = var.availability_zone
   user_data_replace_on_change = true
   user_data_base64            = data.cloudinit_config.boundary_self-managed_worker.rendered
   subnet_id                   = aws_subnet.boundary_db_demo_subnet.id
