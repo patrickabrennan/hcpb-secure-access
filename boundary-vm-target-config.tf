@@ -5,7 +5,7 @@ resource "boundary_host_catalog_plugin" "aws_plugin" {
   scope_id    = boundary_scope.project.id
   plugin_name = "aws"
   attributes_json = jsonencode({
-    "region" = var.aws_region,
+    "region" = "us-east-1",
   "disable_credential_rotation" = true })
 
 
