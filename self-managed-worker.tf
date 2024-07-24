@@ -118,7 +118,7 @@ parameter. The depends_on argument is set to ensure that the networking is estab
 and that the boundary_worker resource also completes, to ensure the token is generated first.
 */
 resource "aws_instance" "boundary_self_managed_worker" {
-  ami                         = "ami-080e1f13689e07408"
+  ami                         = var.aws_ami
   instance_type               = "t2.micro"
   availability_zone           = var.availability_zone
   user_data_replace_on_change = true
