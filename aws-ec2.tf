@@ -1,5 +1,5 @@
 resource "aws_instance" "boundary_public_target" {
-  ami               = "ami-080e1f13689e07408"
+  ami               = var.aws_ami
   instance_type     = "t2.micro"
   availability_zone = var.availability_zone
   user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
