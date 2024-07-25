@@ -16,6 +16,10 @@ variable "tfc_vault_dynamic_credentials" {
   })
 }
 
+variable "aws_secret" {
+  type = string
+}
+
 variable "boundary_addr" {
   type = string
 }
