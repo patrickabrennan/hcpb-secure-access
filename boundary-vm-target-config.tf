@@ -1,18 +1,52 @@
-# Boundary config for the EC2 target
-resource "boundary_host_catalog_plugin" "aws_plugin" {
-  name        = "AWS Catalogue"
-  description = "AWS Host Catalogue"
-  scope_id    = boundary_scope.project.id
-  plugin_name = "aws"
-  attributes_json = jsonencode({
-    "region" = "us-east-1",
-    "disable_credential_rotation" = true })
+#PB added 7/25/2024
+# Example below heavily lifted from:
+# https://registry.terraform.io/providers/hashicorp/boundary/latest/docs/resources/host_catalog_plugin
 
-  secrets_json = jsonencode({
-    "access_key_id"     = var.aws_access,
-    "secret_access_key" = var.aws_secret
-  })
+resource "boundary_scope" "org" {
+  name                     = "demo_organization"
+  description              = "Used to demo Boundary capabilities."
+  scope_id                 = "global"
+  auto_create_admin_role   = true
+  auto_create_default_role = true
 }
+
+resource "boundary_scope" "project" {
+  name                   = "demo_dynamic_host_catalog"
+  description            = "Used to demo Boundary dynamic host catalog capabilities."
+  scope_id               = boundary_scope.org.id
+  auto_create_admin_role = true
+}
+
+resource "boundary_host_catalog_plugin" "aws_ec2" {
+  name            = "AWS Sandbox"
+  description     = "Host catalog in AWS Sandbox"
+  scope_id        = boundary_scope.project.id
+  plugin_name     = "aws"
+  attributes_json = jsonencode({ "region" = data.aws_region.current.name })
+  secrets_json = jsonencode({
+    "access_key_id"     = aws_iam_access_key.boundary_dynamic_host_catalog.id
+    "secret_access_key" = aws_iam_access_key.boundary_dynamic_host_catalog.secret
+  })
+  depends_on = [time_sleep.boundary_dynamic_host_catalog_user_ready]
+}
+PB end 7/258/2024
+
+#PB comment out below
+# Boundary config for the EC2 target
+#resource "boundary_host_catalog_plugin" "aws_plugin" {
+#  name        = "AWS Catalogue"
+#  description = "AWS Host Catalogue"
+#  scope_id    = boundary_scope.project.id
+#  plugin_name = "aws"
+ # attributes_json = jsonencode({
+ #   "region" = "us-east-1",
+ #   "disable_credential_rotation" = true })
+#
+ # secrets_json = jsonencode({
+ #   "access_key_id"     = var.aws_access,
+ #   "secret_access_key" = var.aws_secret
+ # })
+#}
 
 resource "boundary_host_set_plugin" "aws_db" {
   name                  = "AWS DB Host Set Plugin"
