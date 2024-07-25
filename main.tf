@@ -32,11 +32,11 @@ terraform {
     #PB added 7/25/2024
     aws = {
       source  = "hashicorp/aws"
-      version = "4.46.0"
+      version >= "4.46.0"
     }
     time = {
       source  = "hashicorp/time"
-      version = "0.9.1"
+      version >= "0.9.1"
     }
     #PB end 7/25/2024
   }
