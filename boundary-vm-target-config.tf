@@ -2,7 +2,7 @@
 # Example below heavily lifted from:
 # https://registry.terraform.io/providers/hashicorp/boundary/latest/docs/resources/host_catalog_plugin
 
-resource "boundary_host_catalog_plugin" "aws_ec2" {
+resource "boundary_host_catalog_plugin" "aws_plugin" {
   name            = "AWS Sandbox"
   description     = "Host catalog in AWS Sandbox"
   scope_id        = boundary_scope.project.id
