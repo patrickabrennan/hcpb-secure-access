@@ -29,6 +29,16 @@ terraform {
       source  = "hashicorp/external"
       version = "2.3.3"
     }
+    #PB added 7/25/2024
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.46.0"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = "0.9.1"
+    }
+    PB end 7/25/2024
   }
 }
 
@@ -77,5 +87,9 @@ provider "boundary" {
 
 resource "random_pet" "unique_names" {
 }
+
+#PB added 7/25/2024
+provider "aws" {}
+provider "time" {}
 
 
