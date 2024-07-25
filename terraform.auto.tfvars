@@ -12,8 +12,8 @@ aws_subnet_cidr = "172.40.10.0/24"
 aws_subnet_cidr2 = "172.40.20.0/24"
 
 #Commented out as using dynamic AWS creds start 7/13/2024
-aws_access = "ASIAUFE4ENBHJB6A5NE2"
-aws_secret = "VWrzzsHPnkyhQpHwU9o/4uFn/RiOSD7oVy3DQIbc"
+aws_access = "ASIAUFE4ENBHPGPORXOO"
+aws_secret = "teJn3WkrOyy2xYWqMoKblrOHFhcOTyr477/bN1TA"
 
 vault_addr = "https://Pat-Brennan-SE-East-vault-cluster-public-vault-01691920.0ac6f10f.z1.hashicorp.cloud:8200"
 vault_token = "hvs.CAESIEeJPrZqZQMzcSOKBLNJYWP6Chfjqmzt7KEg-kZYnfeVGikKImh2cy5hRFMwWUp1bklvVFBYQ0dXaGVValFYRksuUXdNVnQQsJm4AQ"
