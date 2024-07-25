@@ -38,7 +38,7 @@ terraform {
       source  = "hashicorp/time"
       version = "0.9.1"
     }
-    PB end 7/25/2024
+    #PB end 7/25/2024
   }
 }
 
@@ -61,17 +61,17 @@ provider "vault" {
   }
 }
 
-provider "vault" {
-  // skip_child_token must be explicitly set to true as HCP Terraform manages the token lifecycle
-  skip_child_token = true
-  alias            = "ALIAS1"
-  address          = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].address
-  namespace        = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].namespace
+#provider "vault" {
+#  // skip_child_token must be explicitly set to true as HCP Terraform manages the token lifecycle
+#  skip_child_token = true
+#  alias            = "ALIAS1"
+#  address          = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].address
+#  namespace        = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].namespace
 
-  auth_login_token_file {
-    filename = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].token_filename
-  }
-}
+#  auth_login_token_file {
+#    filename = var.tfc_vault_dynamic_credentials.aliases["ALIAS1"].token_filename
+#  }
+#}
 
 
 
