@@ -16,10 +16,6 @@ variable "tfc_vault_dynamic_credentials" {
   })
 }
 
-variable "aws_secret" {
-  type = string
-}
-
 variable "boundary_addr" {
   type = string
 }
@@ -32,13 +28,13 @@ variable "password_auth_method_password" {
   type = string
 }
 
-variable "aws_access" {
-  type = string
-}
+#variable "aws_access" {
+#  type = string
+#}
 
-variable "aws_secret" {
-  type = string
-}
+#variable "aws_secret" {
+#  type = string
+#}
 
 variable "aws_ami" {
   type = string
