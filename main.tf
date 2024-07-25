@@ -44,9 +44,9 @@ terraform {
 
 # Declare the provider for the AWS resource to be managed by Terraform
 #PB commented out 7/25/2024
-#provider "aws" {
-#  region = "us-east-1"
-#}
+provider "aws" {
+  region = "us-east-1"
+}
 
 #provider "vault" {
 #}
@@ -90,7 +90,7 @@ resource "random_pet" "unique_names" {
 }
 
 #PB added 7/25/2024
-provider "aws" {}
+#provider "aws" {}
 provider "time" {}
 
 
