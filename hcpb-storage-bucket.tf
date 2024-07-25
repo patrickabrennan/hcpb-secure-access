@@ -1,3 +1,4 @@
+\\*
 resource "boundary_storage_bucket" "boundary_storage_bucket" {
   name            = "${random_pet.unique_names.id}-session-recording-bucket"
   scope_id        = "global"
@@ -14,3 +15,4 @@ resource "boundary_storage_bucket" "boundary_storage_bucket" {
   depends_on = [aws_s3_bucket.boundary_session_recording_bucket, aws_db_instance.boundary_demo]
 
 }
+*//
