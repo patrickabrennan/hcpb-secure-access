@@ -7,8 +7,11 @@ resource "boundary_host_catalog_plugin" "aws_plugin" {
   description     = "Host catalog in AWS Sandbox"
   scope_id        = boundary_scope.project.id
   plugin_name     = "aws"
-  attributes_json = jsonencode({ "region" = data.aws_region.current.name,
-"disable_credential_rotation" = "true" })
+  attributes_json = jsonencode({
+  "region" = data.aws_region.current.name,
+  "disable_credential_rotation" = true 
+  })
+  
   secrets_json = jsonencode({
     "access_key_id"     = aws_iam_access_key.boundary_dynamic_host_catalog.id
     "secret_access_key" = aws_iam_access_key.boundary_dynamic_host_catalog.secret
