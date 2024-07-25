@@ -29,7 +29,7 @@ resource "boundary_host_catalog_plugin" "aws_ec2" {
   })
   depends_on = [time_sleep.boundary_dynamic_host_catalog_user_ready]
 }
-PB end 7/258/2024
+#PB end 7/258/2024
 
 #PB comment out below
 # Boundary config for the EC2 target
@@ -47,7 +47,7 @@ PB end 7/258/2024
  #   "secret_access_key" = var.aws_secret
  # })
 #}
-
+PB end comment out 7/25/2024
 resource "boundary_host_set_plugin" "aws_db" {
   name                  = "AWS DB Host Set Plugin"
   host_catalog_id       = boundary_host_catalog_plugin.aws_plugin.id
