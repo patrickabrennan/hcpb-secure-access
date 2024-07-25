@@ -2,21 +2,6 @@
 # Example below heavily lifted from:
 # https://registry.terraform.io/providers/hashicorp/boundary/latest/docs/resources/host_catalog_plugin
 
-resource "boundary_scope" "org" {
-  name                     = "demo_organization"
-  description              = "Used to demo Boundary capabilities."
-  scope_id                 = "global"
-  auto_create_admin_role   = true
-  auto_create_default_role = true
-}
-
-resource "boundary_scope" "project" {
-  name                   = "demo_dynamic_host_catalog"
-  description            = "Used to demo Boundary dynamic host catalog capabilities."
-  scope_id               = boundary_scope.org.id
-  auto_create_admin_role = true
-}
-
 resource "boundary_host_catalog_plugin" "aws_ec2" {
   name            = "AWS Sandbox"
   description     = "Host catalog in AWS Sandbox"
