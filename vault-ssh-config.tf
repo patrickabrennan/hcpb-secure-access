@@ -11,7 +11,9 @@ resource "vault_ssh_secret_backend_role" "ssh_role" {
   key_type                = "ca"
   allow_host_certificates = true
   allow_user_certificates = true
-  default_user            = "e2-user"
+  default_user            = "ec2-user"
+  #7/26/2025 Commented out as wrong user
+  #default_user            = "e2-user"
   ttl                     = "10m0s"
 
   default_extensions = {
