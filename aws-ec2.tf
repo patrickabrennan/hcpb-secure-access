@@ -32,7 +32,9 @@ data "cloudinit_config" "ssh_trusted_ca" {
     sudo curl -o /etc/ssh/trusted-user-ca-keys.pem \
     --header "X-Vault-Namespace: admin" \
     -X GET \
-    ${var.vault_addr}/v1/ssh-client-signer/public_key
+    ${var.vault_addr}/v1/ssh-client-signer/boundary-client    
+    #7/26/2024 Comment out
+    #${var.vault_addr}/v1/ssh-client-signer/public_key
     sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
     sudo systemctl restart sshd.service
     EOF
