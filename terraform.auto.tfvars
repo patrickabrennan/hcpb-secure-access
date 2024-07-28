@@ -3,8 +3,8 @@ availability_zone = "us-east-1a"
 availability_zone2 = "us-east-1b"
 aws_ami = "ami-0427090fd1714168b"
 
-boundary_addr = "https://0d746b86-aaa4-46e8-b0f2-b950ca75a311.boundary.hashicorp.cloud"
-auth_method_id = "ampw_iWKGjJC0KM"
+boundary_addr = "https://69216537-7ff3-4136-a096-61ac7f4c00fa.boundary.hashicorp.cloud"
+auth_method_id = "ampw_pwC2S7SJND"
 password_auth_method_login_name = "admin"
 password_auth_method_password = "PatisTesting!"
 
@@ -13,7 +13,7 @@ aws_subnet_cidr = "172.40.10.0/24"
 aws_subnet_cidr2 = "172.40.20.0/24"
 
 vault_addr = "https://Pat-Brennan-SE-East-vault-cluster-public-vault-01691920.0ac6f10f.z1.hashicorp.cloud:8200"
-vault_token = "hvs.CAESIKuHoWezMPnuNhLVz5G135Q8WpST6IbWqgcF65Ru4BbgGikKImh2cy4zdjFJUVdiS3ZwYmdsN3hRemxkM3BqQzQuUXdNVnQQk6W7AQ"
+vault_token = "hvs.CAESIK6qEK6KVwEQ1FGuD_V4cs9LIciBwUqb17Zh9ERy6Z-aGikKImh2cy5raWZCMk5SZ2FYb2k0dzQ1c3lyVGtKajMuUXdNVnQQwOS7AQ"
 
 db_username = "dbadmin"
 db_password = "dbpassword"
