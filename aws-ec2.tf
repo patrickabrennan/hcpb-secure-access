@@ -4,7 +4,7 @@ resource "aws_instance" "boundary_public_target" {
   availability_zone = var.availability_zone
   #PB commnet out 7/27/2024
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
-  user_data          = ./template_files/aws-ec2-target"
+  user_data          = ./template_files/aws-ec2-target
   network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
     device_index         = 0
