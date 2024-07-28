@@ -29,22 +29,29 @@ data "cloudinit_config" "ssh_trusted_ca" {
   part {
     content_type = "text/x-shellscript"
     content      = <<-EOF
-    sudo curl -o /etc/ssh/trusted-user-ca-keys.pem \
+    #PB 7/28/2024 removed sudo below
+    #sudo curl -o /etc/ssh/trusted-user-ca-keys.pem \
+    curl -o /etc/ssh/trusted-user-ca-keys.pem \
     --header "X-Vault-Namespace: admin" \
     -X GET \
     ${var.vault_addr}/v1/ssh-client-signer/boundary-client    
     #7/26/2024 Comment out
     #${var.vault_addr}/v1/ssh-client-signer/public_key
-    sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+    #sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+    echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
     sudo systemctl restart sshd.service
+    systemctl restart sshd.service
     EOF
   }
 
   part {
+    #PB 7/28/2024 removed sudo below
     content_type = "text/x-shellscript"
     content      = <<-EOF
-    sudo adduser admin_user
-    sudo adduser danny
+    #sudo adduser admin_user
+    adduser admin_user
+    #sudo adduser danny
+    adduser danny
     EOF
   }
 }
