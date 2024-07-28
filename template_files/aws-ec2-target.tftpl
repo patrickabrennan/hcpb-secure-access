@@ -1,0 +1,9 @@
+@!/bin/bash
+sudo curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET ${var.vault_addr}/v1/ssh-client-signer/boundary-client    
+#PB 7/26/2024 Comment out
+#${var.vault_addr}/v1/ssh-client-signer/public_key
+echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+systemctl restart sshd.service
+
+adduser admin_user
+adduser danny
