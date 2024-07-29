@@ -20,7 +20,7 @@ resource "aws_instance" "boundary_public_target" {
     systemctl restart sshd.service
     EOF
   
-  network_interface {
+    network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
     device_index         = 0
   }
@@ -30,6 +30,13 @@ resource "aws_instance" "boundary_public_target" {
     application  = "dev",
   }
 }
+
+resource "aws_network_interface" "boundary_public_target_ni" {
+  subnet_id               = aws_subnet.boundary_db_demo_subnet.id
+  security_groups         = [aws_security_group.allow_all.id]
+  private_ip_list_enabled = false
+}
+
 
 
 #PB comment out bwlow 7/27/2024
