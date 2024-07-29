@@ -5,6 +5,13 @@ resource "aws_instance" "boundary_public_target" {
   #PB commnet out 7/27/2024
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
   
+data "template_file" "user_data" {template = "${file(".template_files/master_config.sh")}"
+}
+
+resource "aws_instance" "master" {
+  user_data = "${data.template_file.user_data.rendered}"
+}
+
   user_data = <<EOF
 #!/bin/bash
 sudo bash
