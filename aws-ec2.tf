@@ -3,14 +3,14 @@ resource "aws_instance" "boundary_public_target" {
   instance_type     = "t2.micro"
   availability_zone = var.availability_zone
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
-  user_data = <<-EOF
-    sudo bash -c 'curl -o /etc/ssh/trusted-user-ca-keys.pem \
-    --header "X-Vault-Namespace: admin" \
-    -X GET \
-    ${var.vault_addr}/v1/ssh-client-signer/public_key'
-    sudo bash -c 'echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config'
-    sudo bash -c 'systemctl restart sshd.service'
-    EOF
+user_data = <<-EOF
+sudo bash -c 'curl -o /etc/ssh/trusted-user-ca-keys.pem \
+--header "X-Vault-Namespace: admin" \
+-X GET \
+${var.vault_addr}/v1/ssh-client-signer/public_key'
+sudo bash -c 'echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config'
+sudo bash -c 'systemctl restart sshd.service'
+EOF
 
   network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
