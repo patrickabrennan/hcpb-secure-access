@@ -25,7 +25,7 @@ resource "aws_network_interface" "boundary_public_target_ni" {
 
 data "template_file" "user_data" {template = "${file("./template_files/aws-ec2-target.tftpl")}"}
 
-resource "aws_instance" "master" {
+resource "aws_instance" "boundary_public_target" {
   user_data = "${data.template_file.user_data.rendered}"
 }
 
