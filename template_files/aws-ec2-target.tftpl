@@ -1,9 +1,12 @@
-@!/bin/bash
-sudo curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET ${var.vault_addr}/v1/ssh-client-signer/boundary-client    
+#!/bin/bash
+sudo bash
+curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET \
+${var.vault_addr}/v1/ssh-client-signer/boundary-client    
 #PB 7/26/2024 Comment out
 #${var.vault_addr}/v1/ssh-client-signer/public_key
-echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+# sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
+#sudo systemctl restart sshd.service
 systemctl restart sshd.service
-
 adduser admin_user
 adduser danny
