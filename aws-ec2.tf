@@ -23,8 +23,7 @@ resource "aws_network_interface" "boundary_public_target_ni" {
 }
 
 
-data "template_file" "user_data" {template = "${file(".template_files/master_config.sh")}"
-}
+data "template_file" "user_data" {template = "${file("./template_files/master_config.sh")}"}
 
 resource "aws_instance" "master" {
   user_data = "${data.template_file.user_data.rendered}"
