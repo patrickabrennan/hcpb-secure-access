@@ -29,20 +29,20 @@ data "cloudinit_config" "ssh_trusted_ca" {
   part {
     content_type = "text/x-shellscript"
     content      = <<-EOF
-    sudo curl -o /etc/ssh/trusted-user-ca-keys.pem \
+    sudo bash -c 'curl -o /etc/ssh/trusted-user-ca-keys.pem \
     --header "X-Vault-Namespace: admin" \
     -X GET \
-    ${var.vault_addr}/v1/ssh-client-signer/public_key
-    sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
-    sudo systemctl restart sshd.service
+    ${var.vault_addr}/v1/ssh-client-signer/public_key'
+    sudo bash -c 'echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config'
+    sudo bash -c 'systemctl restart sshd.service'
     EOF
   }
 
   part {
     content_type = "text/x-shellscript"
     content      = <<-EOF
-    sudo adduser admin_user
-    sudo adduser danny
+    sudo bash -c 'adduser admin_user'
+    sudo nash -c 'adduser danny'
     EOF
   }
 }
