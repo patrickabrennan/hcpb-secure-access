@@ -7,7 +7,7 @@ resource "aws_instance" "boundary_public_target" {
     sudo bash -c 'curl -o /etc/ssh/trusted-user-ca-keys.pem \
     --header "X-Vault-Namespace: admin" \
     -X GET \
-    ${var.vault_addr}/v1/ssh-client-signer/public_key'
+    var.vault_addr/v1/ssh-client-signer/public_key'
     sudo bash -c 'echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config'
     sudo bash -c 'systemctl restart sshd.service'
     EOF
