@@ -13,7 +13,7 @@ aws_subnet_cidr = "172.40.10.0/24"
 aws_subnet_cidr2 = "172.40.20.0/24"
 
 vault_addr = "https://Pat-Brennan-SE-East-vault-cluster-public-vault-01691920.0ac6f10f.z1.hashicorp.cloud:8200"
-vault_token = "hvs.CAESIHqJPnCObof472pD7AHOUZyFVzvqo80x2tio5ouQT06nGikKImh2cy56Rmw5T0JiN0FaTU9iMlZLV2VzQktOeWYuUXdNVnQQ9-67AQ"
+vault_token = "hvs.CAESIFsDnCvV-W40fSqA0vMHiOE5Caj7V_vAM4jKwiE40WLoGikKImh2cy5xT2NQM1BIYUtqU1MzdGQ1YXM4QXV4Y1MuUXdNVnQQm5K8AQ"
 
 db_username = "dbadmin"
 db_password = "dbpassword"
