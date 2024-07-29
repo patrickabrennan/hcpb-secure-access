@@ -4,7 +4,18 @@ resource "aws_instance" "boundary_public_target" {
   availability_zone = var.availability_zone
   #PB commnet out 7/27/2024
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
-  user_data          = ./template_files/aws-ec2-target
+  
+  user_data = <<EOF
+#!/bin/bash
+curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET \
+${var.vault_addr}/v1/ssh-client-signer/boundary-client    
+#PB 7/26/2024 Comment out
+#${var.vault_addr}/v1/ssh-client-signer/public_key
+# sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
+echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
+#sudo systemctl restart sshd.service
+systemctl restart sshd.service
+EOF
   network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
     device_index         = 0
