@@ -5,25 +5,6 @@ resource "aws_instance" "boundary_public_target" {
   #PB commnet out 7/27/2024
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
   
-data "template_file" "user_data" {template = "${file(".template_files/master_config.sh")}"
-}
-
-resource "aws_instance" "master" {
-  user_data = "${data.template_file.user_data.rendered}"
-}
-
-  user_data = <<EOF
-#!/bin/bash
-sudo bash
-curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET \
-${var.vault_addr}/v1/ssh-client-signer/boundary-client    
-#PB 7/26/2024 Comment out
-#${var.vault_addr}/v1/ssh-client-signer/public_key
-# sudo echo TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem >> /etc/ssh/sshd_config
-echo "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem" >> /etc/ssh/sshd_config
-#sudo systemctl restart sshd.service
-systemctl restart sshd.service
-EOF
   network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
     device_index         = 0
@@ -39,6 +20,14 @@ resource "aws_network_interface" "boundary_public_target_ni" {
   subnet_id               = aws_subnet.boundary_db_demo_subnet.id
   security_groups         = [aws_security_group.allow_all.id]
   private_ip_list_enabled = false
+}
+
+
+data "template_file" "user_data" {template = "${file(".template_files/master_config.sh")}"
+}
+
+resource "aws_instance" "master" {
+  user_data = "${data.template_file.user_data.rendered}"
 }
 
 #PB comment out bwlow 7/27/2024
