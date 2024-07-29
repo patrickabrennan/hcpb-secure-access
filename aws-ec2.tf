@@ -3,7 +3,8 @@ resource "aws_instance" "boundary_public_target" {
   instance_type     = "t2.micro"
   availability_zone = var.availability_zone
   #user_data_base64  = data.cloudinit_config.ssh_trusted_ca.rendered
-  user_data = <<EOF
+  user_data = <<-EOF
+#!/bin/bash
 sudo bash -c 'curl -o /etc/ssh/trusted-user-ca-keys.pem \
 --header "X-Vault-Namespace: admin" \
 -X GET \
