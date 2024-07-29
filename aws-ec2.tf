@@ -7,6 +7,7 @@ resource "aws_instance" "boundary_public_target" {
   
   user_data = <<EOF
 #!/bin/bash
+sudo bash
 curl -o /etc/ssh/trusted-user-ca-keys.pem --header "X-Vault-Namespace: admin" -X GET \
 ${var.vault_addr}/v1/ssh-client-signer/boundary-client    
 #PB 7/26/2024 Comment out
