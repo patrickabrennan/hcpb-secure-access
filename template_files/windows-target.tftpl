@@ -19,8 +19,8 @@ if($runCount -ge 0) {
             Set-ItemProperty -Path $Path -Name RunCount -Value $runCount
             Write-Host "Updated Run Count to" $runCount
 
-            Write-Host "Setting Admin Password"
-            net user Pat "${admin_pass}"
+            Write-Host "Setting Admin Password" /add
+            net user pat "${rdp_admin_pass}"
             
             $NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
 
