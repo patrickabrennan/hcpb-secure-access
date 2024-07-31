@@ -20,7 +20,7 @@ if($runCount -ge 0) {
             Write-Host "Updated Run Count to" $runCount
 
             Write-Host "Setting Admin Password" /add
-            net user pat "${rdp_admin_pass}"
+            net user pat "${admin_pass}"
             
             $NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
 
