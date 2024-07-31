@@ -22,7 +22,7 @@ if($runCount -ge 0) {
 
             Write-Host "Setting Admin Password"
 
-            net user pat "${admin_pass}"
+            net user pat "${admin_pass}" /add
             net localgroup administrators pat /add
             
             $NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
