@@ -70,9 +70,12 @@ if($runCount -ge 0) {
             Write-Host "Updated Run Count to" $runCount
 
             Write-Host "Setting Admin Password"
-            net user Administrator "${admin_pass}"
+            #net user Administrator "${admin_pass}"
+            net user Administrator PatisTesting!
             
-            $NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
+            #$NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
+            $NewPassword = ConvertTo-SecureString PatisTesting! -AsPlainText -Force
+
 
             Write-Host "Installing Domain Services"
             Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
