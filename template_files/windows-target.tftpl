@@ -4,16 +4,6 @@ Start-Transcript -Path "C:\Windows\cloudinit.log" -Append
 
 $path= 'HKLM:\Software\UserData'
 
-if(!(Get-Item $Path -ErrorAction SilentlyContinue)) {
-    New-Item $Path
-    New-ItemProperty -Path $Path -Name RunCount -Value 0 -PropertyType dword
-}
-
-$runCount = Get-ItemProperty -Path $path -Name Runcount -ErrorAction SilentlyContinue | Select-Object -ExpandProperty RunCount
-
-if($runCount -ge 0) {
-    switch($runCount) {
-        0 {
             Write-Host "Run Count is" $runCount
             $runCount = 1
             Set-ItemProperty -Path $Path -Name RunCount -Value $runCount
@@ -22,7 +12,5 @@ if($runCount -ge 0) {
 Write-Host "Creating local 'Admin' account and Password so built 'Administrator' acocunt is locked down"
 net user admin "${admin_pass}" /add
 net localgroup administrators admin /add
-
-}
 
 </powershell>
