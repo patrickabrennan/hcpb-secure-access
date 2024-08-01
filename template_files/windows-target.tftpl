@@ -21,10 +21,10 @@ if($runCount -ge 0) {
 
             Write-Host "Setting Admin Password"
 
-            net user pat This1sForTesting! /add
+            net user pat "This1sForTesting!" /add
             net localgroup administrators pat /add
             
-            $NewPassword = ConvertTo-SecureString "${admin_pass}" -AsPlainText -Force
+            $NewPassword = ConvertTo-SecureString "This1sForTesting!" -AsPlainText -Force
 
             Write-Host "Installing Domain Services"
             Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
