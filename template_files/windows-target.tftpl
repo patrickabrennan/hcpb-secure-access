@@ -26,9 +26,6 @@ if($runCount -ge 0) {
             
             $NewPassword = ConvertTo-SecureString "This1sForTesting!" -AsPlainText -Force
 
-            Write-Host "Installing Domain Services"
-            Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
-            Install-ADDSForest -DomainName boundary.lab -InstallDNS -SafeModeAdministratorPassword $NewPassword -Confirm:$false
         }
         1 {
             Write-Host "Run Count is" $runCount
@@ -36,9 +33,6 @@ if($runCount -ge 0) {
             Set-ItemProperty -Path $Path -Name RunCount -Value $runCount
             Write-Host "Updated Run Count to" $runCount
 
-            Write-Host "Installing AD Certificate Services"
-            Install-WindowsFeature AD-Certificate -IncludeManagementTools
-            Install-AdcsCertificationAuthority -CAType EnterpriseRootCA -CACommonName $(hostname) -Confirm:$false
             Restart-Computer -Confirm:$false  
         }
     }
