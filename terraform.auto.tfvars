@@ -26,5 +26,5 @@ s3_bucket_name = "pb-s3-hcpb-bucket"
 s3_bucket_name_tags = "session-recording"
 s3_bucket_env_tags = "boundary"
 
-rdp_admin_pass = "This1sForTesting!"
+rdp_admin_pass = "PB13Testing!"
 rdp_admin_username = "pat"
