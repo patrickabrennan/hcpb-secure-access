@@ -12,8 +12,7 @@ resource "vault_token" "boundary_vault_token" {
 resource "boundary_credential_store_vault" "vault_cred_store" {
   name        = "boundary-vault-credential-store"
   description = "Vault Credential Store"
-  #PB 8/1/2024 took address out as using Vault / TF Dynamci Creds
-  #address     = var.vault_addr
+  address     = var.vault_addr
   token       = vault_token.boundary_vault_token.client_token
   namespace   = "admin"
   scope_id    = boundary_scope.project.id
