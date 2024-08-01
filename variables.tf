@@ -66,13 +66,13 @@ variable "availability_zone2" {
   type        = string
 }
 
-variable "vault_addr" {
-  type = string
-}
+#variable "vault_addr" {
+#  type = string
+#}
 
-variable "vault_token" {
-  type = string
-}
+#variable "vault_token" {
+#  type = string
+#}
 
 variable "db_username" {
   type    = string
