@@ -5,7 +5,7 @@ Start-Transcript -Path "C:\Windows\cloudinit.log" -Append
 $path= 'HKLM:\Software\UserData'
 
 Write-Host "Creating local 'Admin' account and Password so built 'Administrator' acocunt is locked down"
-net user "${rdp_admin_username}" "${admin_pass}" /add
-net localgroup administrators "${rdp_admin_username}" /add
+net user admin "${admin_pass}" /add
+net localgroup administrators admin /add
 
 </powershell>
