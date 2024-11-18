@@ -4,8 +4,8 @@ availability_zone2 = "us-east-1b"
 
 aws_ami = "ami-070b7c2988d4e2c89"
 
-boundary_addr = "https://763a61b7-18b1-4e8e-9244-78cbb1663136.boundary.hashicorp.cloud"
-auth_method_id = "ampw_2rkG8jDTs2"
+boundary_addr = "https://6bd92a89-b2ab-4e00-8504-d1dbbbb06af0.boundary.hashicorp.cloud/scopes/global/scopes"
+auth_method_id = "ampw_2Gitp9tQeD"
 password_auth_method_login_name = "admin"
 password_auth_method_password = "PatisTesting!"
 
