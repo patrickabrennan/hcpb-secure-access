@@ -3,7 +3,7 @@ availability_zone = "us-east-1a"
 availability_zone2 = "us-east-1b"
 
 aws_ami = "ami-070b7c2988d4e2c89"
-
+ 
 boundary_addr = "https://95747518-1710-4afb-afad-eefa31667836.boundary.hashicorp.cloud"
 auth_method_id = "ampw_E8ry2r4Hvl"
 password_auth_method_login_name = "admin"
