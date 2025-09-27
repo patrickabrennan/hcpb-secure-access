@@ -1,7 +1,16 @@
 //Create a periodic, orphan token for Boundary with the attached policies
 resource "vault_token" "boundary_vault_token" {
   display_name = "boundary-token"
-  policies     = ["boundary-controller", "ssh-policy", "policy-database"]
+  #commnet out 9-25-2025
+  #policies     = ["boundary-controller", "ssh-policy", "policy-database"]
+  #end comment out and add 9-25-2025
+  policies = [
+    "boundary-controller",
+    "ssh-policy",
+    "policy-database",
+    vault_policy.policy_windows_rdp.name,
+  ]
+  #end add 9-25-2025
   no_parent    = true
   renewable    = true
   ttl          = "24h"
