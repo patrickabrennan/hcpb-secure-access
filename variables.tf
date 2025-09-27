@@ -119,3 +119,14 @@ variable "rdp_admin_username" {
   description = "The admin username for RDP target"
   default     = "Administrator"
 }
+
+#Added 9-25-2025
+variable "rdp_vault_creds_path" {
+  type        = string
+  description = <<-EOT
+    Vault path that returns a {username,password} pair for Windows/RDP.
+    Examples:
+      - "ad/creds/boundary-rdp"     (Vault Active Directory secrets engine role)
+      - "windows/creds/boundary-rdp" (Vault Windows secrets engine role)
+  EOT
+}
