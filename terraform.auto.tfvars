@@ -25,3 +25,11 @@ s3_bucket_env_tags = "boundary"
 
 rdp_admin_pass = "PB13Testing!"
 rdp_admin_username = "admin"
+
+#addexd 9-25-2025
+# For AD dynamic creds
+rdp_vault_creds_path = "ad/creds/boundary-rdp"
+
+# OR, for Windows local-account rotation
+# rdp_vault_creds_path = "windows/creds/boundary-rdp"
+#end add 9-25-2025
