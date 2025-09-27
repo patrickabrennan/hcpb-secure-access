@@ -55,12 +55,12 @@ resource "boundary_credential_store_static" "boundary_cred_store" {
 
 #commnwr out 9-25-2025
 //Static Credentials for Boundary credential store
-resource "boundary_credential_username_password" "rdp_userpass" {
-  credential_store_id = boundary_credential_store_static.boundary_cred_store.id
-  password            = var.rdp_admin_pass
-  username            = var.rdp_admin_username
-
-}
+#resource "boundary_credential_username_password" "rdp_userpass" {
+#  credential_store_id = boundary_credential_store_static.boundary_cred_store.id
+#  password            = var.rdp_admin_pass
+#  username            = var.rdp_admin_username
+#
+#}
 #end commnet out 9-25-2025
 
 #add 9-25-2025
