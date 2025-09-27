@@ -58,3 +58,16 @@ resource "vault_policy" "postgres_db" {
   }
   EOT
 }
+
+#added 9-25-2025
+# vault-policy.tf
+resource "vault_policy" "policy_windows_rdp" {
+  name   = "policy-windows-rdp"
+  policy = <<-EOT
+  path "${var.rdp_vault_creds_path}" {
+    capabilities = ["read"]
+  }
+  EOT
+}
+#end add 9-25-2025
+
