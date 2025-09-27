@@ -53,6 +53,7 @@ resource "boundary_credential_store_static" "boundary_cred_store" {
   scope_id    = boundary_scope.project.id
 }
 
+#commnwr out 9-25-2025
 //Static Credentials for Boundary credential store
 resource "boundary_credential_username_password" "rdp_userpass" {
   credential_store_id = boundary_credential_store_static.boundary_cred_store.id
@@ -60,3 +61,15 @@ resource "boundary_credential_username_password" "rdp_userpass" {
   username            = var.rdp_admin_username
 
 }
+#end commnet out 9-25-2025
+
+#add 9-25-2025
+resource "boundary_credential_library_vault" "rdp_vault_creds" {
+  name                = "vault-rdp-credential-library"
+  description         = "Dynamic RDP credentials from Vault"
+  credential_store_id = boundary_credential_store_vault.vault_cred_store.id
+  path                = var.rdp_vault_creds_path
+  http_method         = "GET"
+  credential_type     = "username_password"
+}
+#end add 9-25-2025
