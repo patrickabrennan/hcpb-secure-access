@@ -33,7 +33,7 @@ sudo bash -c 'systemctl restart sshd.service'
 EOF
 
   #9/28/2025 change from network_interface to primary_network_interface per TF warning message
-  primary_network_interfacenetwork_interface {
+  primary_network_interface {
     network_interface_id = aws_network_interface.boundary_public_target_ni.id
     device_index         = 0
   }
