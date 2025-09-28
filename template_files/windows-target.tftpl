@@ -7,6 +7,21 @@ Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" `
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 </powershell>
 
+$User = "winadmin"
+$Pass = ConvertTo-SecureString "SuperS3cret!123" -AsPlainText -Force
+
+# Create or update the local user
+if (-not (Get-LocalUser -Name $User -ErrorAction SilentlyContinue)) {
+  New-LocalUser -Name $User -Password $Pass -FullName "Boundary RDP" -Description "Local admin for Boundary RDP"
+} else {
+  Set-LocalUser -Name $User -Password $Pass
+}
+
+# Grant rights and enable RDP
+Add-LocalGroupMember -Group "Administrators" -Member $User
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member $User
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 
 
