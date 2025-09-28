@@ -35,10 +35,13 @@ resource "boundary_target" "rdp" {
 
   # REMOVE this:
   # brokered_credential_source_ids = [boundary_credential_username_password.rdp_userpass.id]
+  brokered_credential_source_ids = [
+    boundary_credential_library_vault.rdp_vault_creds.id
+  ]
 
   # ADD this for RDP credential injection:
   # Inject dynamic RDP creds from Vault into the session:
-  injected_application_credential_source_ids = [
-    boundary_credential_library_vault.rdp_vault_creds.id
-  ]
+  ##injected_application_credential_source_ids = [
+  ##  boundary_credential_library_vault.rdp_vault_creds.id
+  ##]
 }
