@@ -38,3 +38,7 @@ resource "aws_instance" "rdp_target" {
 
   tags = { Team = "IT", Name = "rdp-target" }
 }
+
+locals {
+  admin_password = rsadecrypt(aws_instance.rdp_target.password_data, var.admin_key_private_pem)
+}
