@@ -1,11 +1,27 @@
-<persist>true</persist>
 <powershell>
-Start-Transcript -Path "C:\Windows\cloudinit.log" -Append
+# Enable RDP
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" `
+  -Name "fDenyTSConnections" -Value 0
 
-$path= 'HKLM:\Software\UserData'
-
-Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+# Open Windows Firewall for RDP
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+</powershell>
+
+
+
+
+
+
+
+
+#<persist>true</persist>
+#<powershell>
+#Start-Transcript -Path "C:\Windows\cloudinit.log" -Append
+
+#$path= 'HKLM:\Software\UserData'
+
+#Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+#Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 
 
@@ -13,4 +29,4 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 #net user admin "${admin_pass}" /add
 #net localgroup administrators admin /add
 
-</powershell>
+#</powershell>
