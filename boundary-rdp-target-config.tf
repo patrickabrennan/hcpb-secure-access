@@ -8,7 +8,7 @@ resource "boundary_host_set_plugin" "aws_rdp" {
 
 #add 9-25-2025
 resource "boundary_target" "rdp" {
-  type                     = "rdp" # changed to rdp on 9/28/2025 "tcp"
+  type                     = "tcp"
   name                     = "aws-windows"
   description              = "AWS Windows Target"
   egress_worker_filter     = " \"self-managed-aws-worker\" in \"/tags/type\" "
