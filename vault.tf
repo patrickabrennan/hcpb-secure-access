@@ -26,10 +26,10 @@ resource "vault_kv_secret_v2" "rdp_admin" {
   name  = var.vault_kv_secret_path
 
   # Boundary expects username/password — match the LOCAL account
-  #data_json = jsonencode({
-  #  username = ".\\Administrator"
-  #  password = local.admin_password
-  #})
+  data_json = jsonencode({
+    username = ".\\Administrator"
+    password = local.admin_password
+  })
 }
 
 # Your existing policy wiring is fine; if you prefer, keep it as-is:
