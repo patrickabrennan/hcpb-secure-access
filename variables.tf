@@ -152,3 +152,9 @@ variable "vault_kv_secret_path" {
   type = string 
   default = "boundary/rdp/svc"
 }
+
+variable "decrypted_admin_password" {
+  type        = string
+  sensitive   = true
+  default     = ""   # keeps destroy safe even if you don't pass it
+}
