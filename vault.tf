@@ -22,15 +22,11 @@ resource "vault_mount" "kv" {
 }
 
 resource "vault_kv_secret_v2" "rdp_admin" {
-  mount = var.vault_kv_mount_path
-  name  = var.vault_kv_secret_path
+  mount = var.vault_kv_mount_path      # e.g., "kv"
+  name  = var.vault_kv_secret_path     # e.g., "boundary/rdp/svc"
 
-  # Boundary expects username/password — match the LOCAL account
   data_json = jsonencode({
     username = ".\\Administrator"
-    #password = local.admin_password
+    password = local.admin_password
   })
 }
-
-# Your existing policy wiring is fine; if you prefer, keep it as-is:
-# path "${var.vault_kv_mount_path}/data/${var.vault_kv_secret_path}" { capabilities=["read"] }
