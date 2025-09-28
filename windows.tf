@@ -28,10 +28,7 @@ resource "aws_instance" "rdp-target" {
   monitoring             = true
   subnet_id              = aws_subnet.boundary_db_demo_subnet.id
   vpc_security_group_ids = [aws_security_group.allow_all.id]
-  #user_data              = templatefile("./template_files/windows-target.tftpl", { admin_pass = var.rdp_admin_pass })
-  # templatefile with an empty var map
-  # simplest — no vars
-  user_data = file("${path.module}/template_files/windows-rdp-enable.tftpl")
+  user_data              = templatefile("./template_files/windows-target.tftpl")
   tags = {
     Team = "IT"
     Name = "rdp-target"
