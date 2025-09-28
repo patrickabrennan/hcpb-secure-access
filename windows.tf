@@ -39,6 +39,11 @@ resource "aws_instance" "rdp_target" {
   tags = { Team = "IT", Name = "rdp-target" }
 }
 
-#locals {
-#  admin_password = rsadecrypt(aws_instance.rdp_target.password_data, var.admin_key_private_pem)
-#}
+locals {
+  # NOTE: resource name must match your EC2 resource in windows.tf
+  admin_password = try(
+    rsadecrypt(aws_instance.rdp_target.password_data, var.admin_key_private_pem),
+    var.decrypted_admin_password,
+    ""
+  )
+}
