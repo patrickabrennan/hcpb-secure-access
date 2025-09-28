@@ -3,7 +3,7 @@ terraform {
   required_providers {
     boundary = {
       source  = "hashicorp/boundary"
-      version = ">=1.0.7"
+      version = ">= 1.3.1"
     }
     http = {
       source  = "hashicorp/http"
