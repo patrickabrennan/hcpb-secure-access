@@ -4,6 +4,7 @@ Start-Transcript -Path "C:\Windows\cloudinit.log" -Append
 
 $path= 'HKLM:\Software\UserData'
 
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member Admin
 Write-Host "Creating local 'Admin' account and Password so built 'Administrator' acocunt is locked down"
 net user admin "${admin_pass}" /add
 net localgroup administrators admin /add
