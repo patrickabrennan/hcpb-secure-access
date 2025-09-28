@@ -28,7 +28,7 @@ resource "vault_kv_secret_v2" "rdp_admin" {
   # Boundary expects username/password — match the LOCAL account
   data_json = jsonencode({
     username = ".\\Administrator"
-    password = local.admin_password
+    #password = local.admin_password
   })
 }
 
