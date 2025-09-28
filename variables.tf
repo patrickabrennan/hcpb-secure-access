@@ -138,3 +138,13 @@ variable "admin_key_private_pem" {
   sensitive   = true
   default     = "/Users/patrick.brennan/sap.pem"
 }
+
+variable "vault_kv_mount_path" { 
+  type = string
+  default = "kv" 
+}
+
+variable "vault_kv_secret_path" {
+  type = string 
+  default = "boundary/rdp/svc"
+}
