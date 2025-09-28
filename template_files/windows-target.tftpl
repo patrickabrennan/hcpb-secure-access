@@ -1,28 +1,76 @@
-<powershell>
-# Enable RDP
+# Run elevated (Administrator PowerShell)
+
+# --- (Optional) Set Administrator password to a known value -------------------
+# $AdminPwdPlain = "REPLACE_WITH_KNOWN_PASSWORD"
+# $AdminPwd = ConvertTo-SecureString $AdminPwdPlain -AsPlainText -Force
+# Enable-LocalUser -Name "Administrator" -ErrorAction SilentlyContinue
+# Set-LocalUser -Name "Administrator" -Password $AdminPwd
+
+# Ensure the built-in Administrator is enabled
+try { Enable-LocalUser -Name "Administrator" -ErrorAction Stop } catch {}
+
+# --- Enable RDP and open firewall --------------------------------------------
+# Allow incoming RDP connections
 Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" `
   -Name "fDenyTSConnections" -Value 0
 
-# Open Windows Firewall for RDP
-Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-</powershell>
+# Require Network Level Authentication (recommended with credential injection)
+# Set to 1 to require NLA, 0 to disable NLA
+New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Force | Out-Null
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" `
+  -Name "UserAuthentication" -Value 1
 
-$User = "winadmin"
-$Pass = ConvertTo-SecureString "SuperS3cret!123" -AsPlainText -Force
+# Enable Windows Firewall rule for RDP
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop" | Out-Null
 
-# Create or update the local user
-if (-not (Get-LocalUser -Name $User -ErrorAction SilentlyContinue)) {
-  New-LocalUser -Name $User -Password $Pass -FullName "Boundary RDP" -Description "Local admin for Boundary RDP"
+# Ensure the Remote Desktop Services service is enabled and running
+Set-Service -Name TermService -StartupType Automatic
+Start-Service -Name TermService
+
+# --- Local policy: allow RDP logon for Administrators; make sure it's not denied
+# Use secedit to grant SeRemoteInteractiveLogonRight and clear deny if needed
+$inf = Join-Path $env:TEMP "rdp-rights.inf"
+$cur = Join-Path $env:TEMP "rdp-rights-current.inf"
+
+secedit /export /cfg $cur | Out-Null
+
+# SIDs: Administrators = S-1-5-32-544, Remote Desktop Users = S-1-5-32-555
+# Grant right if missing; keep any existing entries
+$curText = Get-Content $cur -ErrorAction SilentlyContinue
+if ($curText -notmatch '^SeRemoteInteractiveLogonRight') {
+  Add-Content $inf "[Unicode]"
+  Add-Content $inf "Unicode=yes"
+  Add-Content $inf "[Version]"
+  Add-Content $inf "signature=`"`$CHICAGO$`""
+  Add-Content $inf "Revision=1"
+  Add-Content $inf "[Privilege Rights]"
+  Add-Content $inf "SeRemoteInteractiveLogonRight = *S-1-5-32-544,*S-1-5-32-555"
 } else {
-  Set-LocalUser -Name $User -Password $Pass
+  # Merge with existing values
+  $line = ($curText | Where-Object { $_ -match '^SeRemoteInteractiveLogonRight' })
+  $vals = $line.Split('=')[1].Trim() -split ','
+  $set = New-Object System.Collections.Generic.HashSet[string]
+  $vals | ForEach-Object { [void]$set.Add($_.Trim()) }
+  [void]$set.Add('*S-1-5-32-544')  # Administrators
+  [void]$set.Add('*S-1-5-32-555')  # Remote Desktop Users
+
+  Add-Content $inf "[Unicode]"
+  Add-Content $inf "Unicode=yes"
+  Add-Content $inf "[Version]"
+  Add-Content $inf "signature=`"`$CHICAGO$`""
+  Add-Content $inf "Revision=1"
+  Add-Content $inf "[Privilege Rights]"
+  Add-Content $inf ("SeRemoteInteractiveLogonRight = " + ($set -join ','))
 }
 
-# Grant rights and enable RDP
-Add-LocalGroupMember -Group "Administrators" -Member $User
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member $User
-Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
-Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+# Remove any explicit deny for remote interactive logon
+# (SeDenyRemoteInteractiveLogonRight should NOT include Administrators)
+Add-Content $inf "SeDenyRemoteInteractiveLogonRight = "
 
+secedit /configure /db "$env:WINDIR\security\database\secedit.sdb" /cfg $inf /areas USER_RIGHTS | Out-Null
+gpupdate /force | Out-Null
+
+Write-Host "RDP enabled, firewall open, NLA on, Administrator enabled and allowed to log on via RDP."
 
 
 
