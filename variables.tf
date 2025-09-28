@@ -131,3 +131,9 @@ variable "rdp_vault_creds_path" {
       - "windows/creds/boundary-rdp" (Vault Windows secrets engine role)
   EOT
 }
+
+variable "admin_key_private_pem" {
+  description = "PEM contents of the private key matching the EC2 key pair (not a path)."
+  type        = string
+  sensitive   = true
+}
