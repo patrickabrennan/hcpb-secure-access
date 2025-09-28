@@ -109,7 +109,7 @@ variable "s3_bucket_env_tags" {
   default     = "boundary"
 }
 
-9-28-2025 commneted out
+#9-28-2025 commneted out
 #variable "rdp_admin_pass" {
 #  type        = string
 #  description = "The password to set on the windows target for the admin user"
