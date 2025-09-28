@@ -114,12 +114,12 @@ variable "rdp_admin_pass" {
   description = "The password to set on the windows target for the admin user"
 }
 
-#variable "rdp_admin_username" {
-#  type        = string
-#  description = "The admin username for RDP target"
-#  default     = "Administrator"
-#}
-#9-28-2025 end comment out 
+variable "rdp_admin_username" {
+  type        = string
+  description = "The admin username for RDP target"
+  default     = "Admin"
+}
+
 
 #Added 9-25-2025
 variable "rdp_vault_creds_path" {
