@@ -30,7 +30,8 @@ resource "aws_instance" "rdp-target" {
   vpc_security_group_ids = [aws_security_group.allow_all.id]
   #user_data              = templatefile("./template_files/windows-target.tftpl", { admin_pass = var.rdp_admin_pass })
   # templatefile with an empty var map
-  user_data = templatefile("${path.module}/template_files/windows-rdp-enable.tftpl", {})
+  # simplest — no vars
+  user_data = file("${path.module}/template_files/windows-rdp-enable.tftpl")
   tags = {
     Team = "IT"
     Name = "rdp-target"
