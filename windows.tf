@@ -28,7 +28,8 @@ resource "aws_instance" "rdp-target" {
   monitoring             = true
   subnet_id              = aws_subnet.boundary_db_demo_subnet.id
   vpc_security_group_ids = [aws_security_group.allow_all.id]
-  user_data              = templatefile("./template_files/windows-target.tftpl", { admin_pass = var.rdp_admin_pass })
+  #commnet ou 9-28-2025
+  #user_data              = templatefile("./template_files/windows-target.tftpl", { admin_pass = var.rdp_admin_pass })
   tags = {
     Team = "IT"
     Name = "rdp-target"
