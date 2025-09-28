@@ -139,6 +139,11 @@ variable "admin_key_private_pem" {
   default     = "/Users/patrick.brennan/sap.pem"
 }
 
+variable "create_kv_mount" { 
+  type = bool 
+  default = false
+}
+
 variable "vault_kv_mount_path" { 
   type = string
   default = "kv" 
