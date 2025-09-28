@@ -136,7 +136,6 @@ variable "admin_key_private_pem" {
   description = "PEM contents of the private key matching the EC2 key pair (not a path)."
   type        = string
   sensitive   = true
-  default     = "/Users/patrick.brennan/sap.pem"
 }
 
 variable "create_kv_mount" { 
