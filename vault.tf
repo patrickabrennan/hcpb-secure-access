@@ -1,18 +1,4 @@
 # If you don't already have a KV v2 mount at "kv", set create_kv_mount=true and include this block.
-variable "create_kv_mount" { 
-  type = bool 
-  default = false
-}
-
-variable "vault_kv_mount_path" {
-  type = string
-  default = "kv"
-}
-
-variable "vault_kv_secret_path" {
-  type = string
-  default = "boundary/rdp/svc"
-}
 
 resource "vault_mount" "kv" {
   count       = var.create_kv_mount ? 1 : 0
