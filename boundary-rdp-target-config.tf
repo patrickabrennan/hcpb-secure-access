@@ -23,7 +23,7 @@ resource "boundary_host_set_plugin" "aws_rdp" {
 
 #add 9-25-2025
 resource "boundary_target" "rdp" {
-  type                     = "tcp"
+  type                     = "rdp" # changed to rdp on 9/28/2025 "tcp"
   name                     = "aws-windows"
   description              = "AWS Windows Target"
   egress_worker_filter     = " \"self-managed-aws-worker\" in \"/tags/type\" "
@@ -35,13 +35,13 @@ resource "boundary_target" "rdp" {
 
   # REMOVE this:
   # brokered_credential_source_ids = [boundary_credential_username_password.rdp_userpass.id]
-  brokered_credential_source_ids = [
-    boundary_credential_library_vault.rdp_vault_creds.id
-  ]
+  #brokered_credential_source_ids = [
+  #  boundary_credential_library_vault.rdp_vault_creds.id
+  #]
 
   # ADD this for RDP credential injection:
   # Inject dynamic RDP creds from Vault into the session:
-  ##injected_application_credential_source_ids = [
-  ##  boundary_credential_library_vault.rdp_vault_creds.id
-  ##]
+  injected_application_credential_source_ids = [
+    boundary_credential_library_vault.rdp_vault_creds.id
+  ]
 }
