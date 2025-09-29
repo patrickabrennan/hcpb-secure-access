@@ -64,8 +64,8 @@ resource "vault_policy" "postgres_db" {
 resource "vault_policy" "policy_windows_rdp" {
   name   = "policy-windows-rdp"
   policy = <<-EOT
-  path "${var.rdp_vault_creds_path}" {
-    capabilities = ["read"]
+  path "secret/data/boundary/rdp" {
+  capabilities = ["read"]
   }
   EOT
 }
