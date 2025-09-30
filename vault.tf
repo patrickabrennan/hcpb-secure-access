@@ -12,7 +12,7 @@ resource "vault_kv_secret_v2" "rdp_admin" {
   name  = var.vault_kv_secret_path     # e.g., "boundary/rdp/svc"
 
   data_json = jsonencode({
-    username = ".\\Administrator"
+    username = "Administrator"
     password = local.admin_password
   })
 }
