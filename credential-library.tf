@@ -63,20 +63,13 @@ resource "boundary_credential_store_static" "boundary_cred_store" {
 #}
 #end commnet out 9-25-2025
 
-# --- FIX: KV v2 response mapping for RDP injection ---
-# Your var.rdp_vault_creds_path is a KV v2 read path (e.g. kv/data/boundary/rdp/svc),
-# so username/password are nested under data.data.<field>. Boundary needs explicit mapping.
+# RDP injected credentials from Vault (KV v1 path: kv/boundary/rdp/svc)
 resource "boundary_credential_library_vault" "rdp_vault_creds" {
   name                = "rdp-vault-creds"
   credential_store_id = boundary_credential_store_vault.vault_cred_store.id
   path                = var.rdp_vault_creds_path
   http_method         = "GET"
   credential_type     = "username_password"
-
-  credential_mapping_overrides = {
-    username = "data.data.username"
-    password = "data.data.password"
-  }
 }
 
 #comment out 1-26-2026
@@ -111,8 +104,6 @@ resource "boundary_credential_library_vault" "rdp_vault_creds" {
 
 
 /*
-
-
 //Create a periodic, orphan token for Boundary with the attached policies
 resource "vault_token" "boundary_vault_token" {
   display_name = "boundary-token"
