@@ -1,41 +1,19 @@
-# If you don't already have a KV v1 mount at "kv", set create_kv_mount=true and include this block.
+# Create a dedicated KV v1 mount just for Boundary RDP injection.
+# This avoids fighting with an existing "kv" mount that is likely KV v2 in HCP Vault.
 
-resource "vault_mount" "kv" {
+resource "vault_mount" "kv_rdp" {
   count       = var.create_kv_mount ? 1 : 0
-  path        = var.vault_kv_mount_path
-  type        = "kv" # KV v1 (flat data) for Boundary RDP credentials
-  description = "KV v1 for Boundary RDP credentials"
+  path        = var.vault_kv_mount_path         # set to "kv-rdp"
+  type        = "kv"                            # KV v1
+  description = "KV v1 for Boundary RDP credentials (flat username/password)"
 }
 
-# Write a flat secret (username/password) so Boundary can map it to credential_type = "username_password"
+# Write a flat secret (no nested data.data like KV v2)
 resource "vault_generic_secret" "rdp_admin" {
-  path = "${var.vault_kv_mount_path}/${var.vault_kv_secret_path}" # e.g., "kv/boundary/rdp/svc"
+  path = "${var.vault_kv_mount_path}/${var.vault_kv_secret_path}" # kv-rdp/boundary/rdp/svc
 
   data_json = jsonencode({
     username = "Administrator"
     password = local.admin_password
   })
 }
-
-
-
-/*
-# If you don't already have a KV v2 mount at "kv", set create_kv_mount=true and include this block.
-
-resource "vault_mount" "kv" {
-  count       = var.create_kv_mount ? 1 : 0
-  path        = var.vault_kv_mount_path
-  type        = "kv-v2"
-  description = "KV v2 for Boundary RDP credentials"
-}
-
-resource "vault_kv_secret_v2" "rdp_admin" {
-  mount = var.vault_kv_mount_path      # e.g., "kv"
-  name  = var.vault_kv_secret_path     # e.g., "boundary/rdp/svc"
-
-  data_json = jsonencode({
-    username = "Administrator"
-    password = local.admin_password
-  })
-}
-*/
