@@ -63,13 +63,28 @@ resource "boundary_credential_store_static" "boundary_cred_store" {
 #}
 #end commnet out 9-25-2025
 
-#add 9-25-2025
 resource "boundary_credential_library_vault" "rdp_vault_creds" {
-  name                = "vault-rdp-credential-library"
-  description         = "Dynamic RDP credentials from Vault"
-  credential_store_id = boundary_credential_store_vault.vault_cred_store.id
+  name                = "rdp-vault-creds"
+  credential_store_id = boundary_credential_store_vault.vault.id
   path                = var.rdp_vault_creds_path
   http_method         = "GET"
   credential_type     = "username_password"
+
+  credential_mapping_overrides = {
+    username = "data.data.username"
+    password = "data.data.password"
+  }
 }
+
+#comment out 1-26-2026
+#add 9-25-2025
+#resource "boundary_credential_library_vault" "rdp_vault_creds" {
+#  name                = "vault-rdp-credential-library"
+#  description         = "Dynamic RDP credentials from Vault"
+#  credential_store_id = boundary_credential_store_vault.vault_cred_store.id
+#  path                = var.rdp_vault_creds_path
+#  http_method         = "GET"
+#  credential_type     = "username_password"
+#}
 #end add 9-25-2025
+#end comment out
