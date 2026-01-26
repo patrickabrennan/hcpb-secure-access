@@ -23,9 +23,6 @@ s3_bucket_name = "pb-s3-hcpb-bucket"
 s3_bucket_name_tags = "session-recording"
 s3_bucket_env_tags = "boundary"
 
-#rdp_admin_pass = "PB13Testing!"
-#rdp_admin_username = "admin"
-
 #addexd 9-25-2025
 # For AD dynamic creds
 rdp_vault_creds_path = "kv/data/boundary/rdp/svc"  #"ad/creds/boundary-rdp"
@@ -36,4 +33,7 @@ rdp_vault_creds_path = "kv/data/boundary/rdp/svc"  #"ad/creds/boundary-rdp"
 
 vault_kv_mount_path = "kv"
 vault_kv_secret_path = "boundary/rdp/svc"
+
+create_kv_mount = true
+
 
