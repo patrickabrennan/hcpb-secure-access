@@ -168,7 +168,7 @@ variable "decrypted_admin_password" {
 
 
 
-\*
+/*
 variable "tfc_vault_dynamic_credentials" {
   description = "Object containing Vault dynamic credentials configuration"
   type = object({
