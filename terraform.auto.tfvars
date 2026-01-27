@@ -31,9 +31,8 @@ rdp_vault_creds_path = "kv-rdp/boundary/rdp/svc"  #"ad/creds/boundary-rdp"
 # rdp_vault_creds_path = "windows/creds/boundary-rdp"
 #end add 9-25-2025
 
-vault_kv_mount_path = "kv-rdp"
-vault_kv_secret_path = "boundary/rdp/svc"
-
-create_kv_mount = true
-
+vault_kv_mount_path   = "kv-rdp"
+vault_kv_secret_path  = "boundary/rdp/svc"
+rdp_vault_creds_path  = "kv-rdp/boundary/rdp/svc"
+create_kv_mount       = true
 
