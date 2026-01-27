@@ -25,7 +25,7 @@ s3_bucket_env_tags = "boundary"
 
 #addexd 9-25-2025
 # For AD dynamic creds
-rdp_vault_creds_path = "kv-rdp/boundary/rdp/svc"  #"ad/creds/boundary-rdp"
+#rdp_vault_creds_path = "kv-rdp/boundary/rdp/svc"  #"ad/creds/boundary-rdp"
 
 # OR, for Windows local-account rotation
 # rdp_vault_creds_path = "windows/creds/boundary-rdp"
