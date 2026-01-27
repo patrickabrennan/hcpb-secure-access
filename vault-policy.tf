@@ -54,12 +54,12 @@ path "ssh-client-signer/sign/boundary-client" {
 EOT
 }
 
-# Policy used by Boundary's token to read the injected RDP creds from KV v1.
 resource "vault_policy" "policy_windows_rdp" {
   name   = "policy-windows-rdp"
   policy = <<-EOT
-  path "${var.vault_kv_mount_path}/${var.vault_kv_secret_path}" {
+  path "kv-rdp/boundary/rdp/svc" {
     capabilities = ["read"]
   }
   EOT
 }
+
