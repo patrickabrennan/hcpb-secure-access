@@ -6,8 +6,6 @@ aws_ami = "ami-070b7c2988d4e2c89"
  
 boundary_addr = "https://0d74e37c-2b8c-47e2-b0b0-52501188d184.boundary.hashicorp.cloud"
 auth_method_id = "ampw_EQALDorSbL"
-password_auth_method_login_name = "admin"
-password_auth_method_password = "PatisTesting!"
 
 aws_vpc_cidr = "172.40.0.0/16"
 aws_subnet_cidr = "172.40.10.0/24"
